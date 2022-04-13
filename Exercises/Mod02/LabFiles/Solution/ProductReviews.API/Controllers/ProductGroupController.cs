@@ -20,14 +20,16 @@ namespace ProductReviews.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<ProductGroup>> Get(int page = 1, int count = 10)
+        public async Task<ICollection<ProductGroup>> Get([FromQuery]int page = 1, int count = 10)
         {
             return await _repository.GetAsync(page, count);
         }
         [HttpGet("{id}")]
-        public async Task<ProductGroup> Get(int id)
+        public async Task<ActionResult<ProductGroup>> Get([FromRoute]int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var pg = await _repository.GetByIdAsync(id);
+            if (pg == null) return NotFound();
+            return pg;
         }
         [HttpPost]
         public async Task<ProductGroup> Post([FromBody]ProductGroup productGroup)
@@ -35,13 +37,13 @@ namespace ProductReviews.API.Controllers
             return await _repository.AddAsync(productGroup);
         }
         [HttpPut("{id}")]
-        public async Task<ProductGroup> Put(int id, [FromBody]ProductGroup productGroup)
+        public async Task<ActionResult<ProductGroup>> Put(int id, [FromBody]ProductGroup productGroup)
         {
             productGroup.Id = id;
             return await _repository.UpdateAsync(productGroup);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _repository.DeleteAsync(id);
             return Ok();
