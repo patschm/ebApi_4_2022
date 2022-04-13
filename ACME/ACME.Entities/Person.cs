@@ -7,6 +7,7 @@
         public string? LastName { get; set; }
         public int Age { get; set; }
 
-        public ICollection<PersonHobby> PersonHobbies { get; set; } = new HashSet<PersonHobby>();
+        // ICollection<PersonHobby> PersonHobbies { get; set; } = new HashSet<PersonHobby>();
+        public ICollection<Hobby> Hobbies { get; set; } = new HashSet<Hobby>();
     }
 }

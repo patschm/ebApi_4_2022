@@ -26,11 +26,12 @@ namespace ACME.DAL.Repositories.EF
 
         public IEnumerable<Hobby> Hobbies(Person p)
         {
-            var dbP = _context.People
-                .Include(px => px.PersonHobbies)
-                    .ThenInclude(px => px.Hobby)
-                .FirstOrDefault(px => px.Id == p.Id);
-            return dbP.PersonHobbies.Select(ph=>ph.Hobby).ToList();
+            //var dbP = _context.People
+            //    .Include(px => px.PersonHobbies)
+            //        .ThenInclude(px => px.Hobby)
+            //    .FirstOrDefault(px => px.Id == p.Id);
+            //return dbP.PersonHobbies.Select(ph=>ph.Hobby).ToList
+            return null;
         }
 
         public void Insert(Person entity)

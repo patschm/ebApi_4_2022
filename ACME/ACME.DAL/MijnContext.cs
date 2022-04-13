@@ -16,7 +16,7 @@ namespace ACME.DAL
         {
             modelBuilder.Entity<Hobby>().Property(h => h.Description).HasMaxLength(255);
 
-            modelBuilder.Entity<PersonHobby>().HasKey(ph => new { ph.PersonId, ph.HobbyId });
+            //.Entity<PersonHobby>().HasKey(ph => new { ph.PersonId, ph.HobbyId });
         }
     }
 }
