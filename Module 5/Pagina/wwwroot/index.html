@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Client</title>
+    </head>
+    <body>
+        <a href="https://login.microsoftonline.com/420d8d99-43b5-46a6-a6d5-2cfc459bc193/oauth2/v2.0/authorize
+        ?response_type=token
+        &client_id=8fe05808-9e57-44ac-8816-69e39f1ae9a0
+        &redirect_uri=https://localhost:7038/index.html
+        &scope=api://8fe05808-9e57-44ac-8816-69e39f1ae9a0/Lezon
+        &response_mode=fragment&state=12345&nonce=678910">Login</a>
+
+        <script>
+            
+            let arr = window.location.hash.substring(1).split("&");
+            let token = arr[0].split("=")[1];
+            console.log(token);
+
+            fetch("https://localhost:7090/weatherforecast", {
+                headers:{
+                    "Authorization": "Bearer " + token
+                }
+            }).then(resp=>console.log(resp));
+        </script>
+    </body>
+</html>

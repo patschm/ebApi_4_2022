@@ -1,13 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pijplijn.Filters;
 
-namespace Pijplijn.Controllers;
+namespace Beveiliging.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private IConfiguration _config;
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -15,18 +14,15 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(IConfiguration config, ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
-        _config = config;
         _logger = logger;
     }
 
-    [ServiceFilter(typeof(TestFilterAttribute))]
-    //[TestFilter]
+    [Authorize]
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
-        System.Console.WriteLine("In de Action");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),

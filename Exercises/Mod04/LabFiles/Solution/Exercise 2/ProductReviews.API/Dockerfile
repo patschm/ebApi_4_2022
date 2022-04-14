@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+ENV ASPNETCORE_DATABASE="Server=host.docker.internal;Database=Mod1DB;User Id=DbUser;Password=Pa\$\$w0rd;MultipleActiveResultSets=True"
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src

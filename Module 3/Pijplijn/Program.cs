@@ -1,7 +1,16 @@
+using Pijplijn;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Configuration.AddJsonFile(Environment.CurrentDirectory, $"Bla.{Environment.GetEnvironmentVariable("Development")}.json");
 // Add services to the container.
 
+System.Console.WriteLine(Environment.GetEnvironmentVariable("ASPNETCORE_BLA"));
+var section = builder.Configuration.GetSection("MijnSpul");
+MijnSpul sp = new MijnSpul();
+section.Bind(sp);
+System.Console.WriteLine(sp.Data);
+//System.Console.WriteLine(section.Value);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
